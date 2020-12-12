@@ -1,13 +1,13 @@
-//page.mainLogin(userId,util.encrypt($('.inpPw').val(), "adminCertification"))
+// mainLogin(userId, encrypt($('.inpPw').val(), "adminCertification"))
 
 
-// var passwd = util.encrypt($("#pw").val(),"userCertification");
+// const passwd = encrypt($("#pw").val(),"userCertification");
 
 
 /**
  * 관리자 계정 암호화
  */
-util.encrypt = function (dataPw, division) {
+const encrypt = (dataPw, division) => {
     //관리자인증에서 salt를 붙여서 사용자 비밀번호 암호화
     var shaSalt = "mcnc";
     var shaPw = CryptoJS.SHA256(dataPw + shaSalt).toString();
