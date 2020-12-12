@@ -1,7 +1,7 @@
-//page.mainLogin(userId,util.encrypt($('.inpPw').val(), "adminCertification"))
+// mainLogin(userId, encrypt($('.inpPw').val(), "adminCertification"))
 
 
-// var passwd = util.encrypt($("#pw").val(),"userCertification");
+// const passwd = encrypt($("#pw").val(),"userCertification");
 
 
 /**
