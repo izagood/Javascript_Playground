@@ -1,8 +1,14 @@
+const CryptoJS = require('crypto-js');
+
 // mainLogin(userId, encrypt($('.inpPw').val(), "adminCertification"))
 
 
 // const passwd = encrypt($("#pw").val(),"userCertification");
 
+/** 테스트 input */
+const TEST_PASSWORD = 'password';
+const ADMIN_LOGIN = 'adminCertification';
+const USER_LOGIN = 'userCertification';
 
 /**
  * 관리자 계정 암호화
@@ -47,4 +53,6 @@ const encrypt = (dataPw, division) => {
     return passwd;
 }
 
-encrypt()
+const returnPassword = encrypt(TEST_PASSWORD, ADMIN_LOGIN);
+
+console.log(returnPassword);
