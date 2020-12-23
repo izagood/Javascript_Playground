@@ -2,60 +2,32 @@
 //page.mainLogin(userId,util.encrypt($('.inpPw').val(), "adminCertification"))
 // var passwd = util.encrypt($("#pw").val(),"userCertification");
 
-const testPassword = '46cc8bd28ea4a4b7af316db84e3706aaZFvOFR+UBShCxR4umnuGdg==3525b7b4c6b18eeca6da9663b590306e';
+const testPassword = '464504872f6e3079ad8d30b4c6ebc605av+n0p1q5ssmpBH5iyWtTA==ff0bc4341a6260c90bdbafde5897cbe5';
 
+const CryptoJS = require('crypto-js');
 
-
-const PBKDF2_HMAC_SHA1 = "PBKDF2WithHmacSHA1";
-const AES = "AES";
-const AES_CBC_PKCS5PADDING = "AES/CBC/PKCS5Padding";
-const UTF8 = "UTF-8";
-
-const cryptoJS = require('crypto-js');
-const aes = require('crypto-js/aes');
-const hmacSha1 = require('crypto-js/hmac-sha1');
-const pbkdf2 = require('crypto-js/pbkdf2');
-
-
-const pbkdf2AesDecrypt = function(salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize) {
+const pbkdf2AesDecrypt = function (salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize) {
     // AES -> PBKDF2 로 변경
-    const decryptedAES = cryptoJS.AES.decrypt(encryptedPasswd, 'A조김예은', { iv: iv });
-    const decryptedPBKDF2HMACSHA1 = pbkdf2Sync()
-    console.log(decrypted);
 
-    const passwd = de;
+    const key256Bits10000Iterations =
+        CryptoJS.PBKDF2(SecurityKey, CryptoJS.enc.Hex.parse(salt), {
+            keySize: keySize / 32,
+            iterations: iterationCount
+        });
 
+    const decryptedAES = CryptoJS.AES.decrypt(
+        encryptedPasswd,
+        key256Bits10000Iterations, {
+            iv: CryptoJS.enc.Hex.parse(iv)
+        }
+    );
+    const password = decryptedAES.toString(CryptoJS.enc.Utf8);
 
-
-    return passwd;
+    return password;
 
 }
-// public pbkdf2AesDecrypt(salt: string, iv: string, SecurityKey: string, encryptedPasswd: string,
-//     iterationCount: number, keySize: number): string {
-//     /** SecretKeyFactory에서 지원하는 PBKDF2-HMAC-SHA1 알고리즘을 적용*/
-//     SecretKeyFactory factory = SecretKeyFactory.getInstance(this.PBKDF2_HMAC_SHA1);
-//     /** Interface KeySpec을 PBEKeySpec생성자에 params를 넣어 구현
-//      * 	salt가 16진수로 encoding되어 있기 때문에 16진수 byte[]로 decoding해준다.
-//      *  decoding은 apache.commons.codec 라이브러리 사용 */
-//     KeySpec spec = new PBEKeySpec(SecurityKey.toCharArray(), Hex.decodeHex(salt.toCharArray()), iterationCount, keySize);
-//     /** Interface SecretKey를 SecretKeySpec생성자에 params를 넣어 구현
-//      * AlgorithmParameters Algorithms name 중 AES 사용 */
-//     SecretKey key = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), this.AES);
-//     /** Cipher transformations 중 AES/CBC/PKCS5Padding(128bits) 사용 
-//      *  PKCS5Padding은 RSA Laboratories, "PKCS #5: Password-Based Encryption Standard," version 1.5, November 1993.*/
-//     Cipher cipher = Cipher.getInstance(this.AES_CBC_PKCS5PADDING);
-//     /** iv가 16진수로 encoding되어 있기 때문에 16진수 byte[]로 decoding해준다.
-//      *  @param int opmode : Cipher.DECRYPT_MODE : 2
-//      *  @param Key key : key 
-//      *  @param AlgorithmParameterSpec params : new IvParameterSpec(Hex.decodeHex(iv.toCharArray())) */
-//     cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(Hex.decodeHex(iv.toCharArray())));
-//     /* encryptedPasswd는 byte[]이고 Base64로 encoding되어 있기 때문에 Base64로 decoding해준다.*/
-//     byte[] decrypted = cipher.doFinal(Base64.decodeBase64(encryptedPasswd));
 
-//     return new String(decrypted, this.UTF8);
-// }
-
-const sortingEncryptedWord = function(saltSize, ivSize, encryptedWord, SecurityKey, iterationCount, keySize) {
+const sortingEncryptedWord = function (saltSize, ivSize, encryptedWord, SecurityKey, iterationCount, keySize) {
 
     /** 암호문의 전체 길이*/
     const cryptPasswdLength = encryptedWord.length;
