@@ -1,10 +1,7 @@
-// 클라쪽에서 올때
 //page.mainLogin(userId,util.encrypt($('.inpPw').val(), "adminCertification"))
+
+
 // var passwd = util.encrypt($("#pw").val(),"userCertification");
-
-const testPassword = '46cc8bd28ea4a4b7af316db84e3706aaZFvOFR+UBShCxR4umnuGdg==3525b7b4c6b18eeca6da9663b590306e';
-
-
 
 const PBKDF2_HMAC_SHA1 = "PBKDF2WithHmacSHA1";
 const AES = "AES";
@@ -17,9 +14,9 @@ const hmacSha1 = require('crypto-js/hmac-sha1');
 const pbkdf2 = require('crypto-js/pbkdf2');
 
 
-const pbkdf2AesDecrypt = function(salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize) {
-    // AES -> PBKDF2 로 변경
-    const decryptedAES = cryptoJS.AES.decrypt(encryptedPasswd, 'A조김예은', { iv: iv });
+const pbkdf2AesDecrypt = (salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize) => {
+
+    const decryptedAES = this.cryptoJS.AES.decrypt(encryptedPasswd, 'A조김예은', { iv: iv });
     const decryptedPBKDF2HMACSHA1 = pbkdf2Sync()
     console.log(decrypted);
 
@@ -55,7 +52,7 @@ const pbkdf2AesDecrypt = function(salt, iv, SecurityKey, encryptedPasswd, iterat
 //     return new String(decrypted, this.UTF8);
 // }
 
-const sortingEncryptedWord = function(saltSize, ivSize, encryptedWord, SecurityKey, iterationCount, keySize) {
+const sortingEncryptedWord = (saltSize, ivSize, encryptedWord, SecurityKey, iterationCount, keySize) => {
 
     /** 암호문의 전체 길이*/
     const cryptPasswdLength = encryptedWord.length;
@@ -66,7 +63,5 @@ const sortingEncryptedWord = function(saltSize, ivSize, encryptedWord, SecurityK
     /** 암호문에서 salt를 saltSize로 잘라줌 */
     const salt = encryptedWord.substring(cryptPasswdLength - saltSize, cryptPasswdLength);
 
-    return pbkdf2AesDecrypt(salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize);
+    return this.pbkdf2AesDecrypt(salt, iv, SecurityKey, encryptedPasswd, iterationCount, keySize);
 }
-
-console.log(sortingEncryptedWord(32, 32, testPassword, 'A조김예은', 10000, 256));

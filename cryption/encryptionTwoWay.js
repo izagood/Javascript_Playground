@@ -10,12 +10,10 @@ const TEST_PASSWORD = 'password';
 /**
  * 관리자 계정 암호화
  */
-const encrypt = function (dataPw) {
-    //관리자인증에서 salt를 붙여서 사용자 비밀번호 암호화
-    const sha256Salt = "mcnc";
-    const sha256Password = CryptoJS.SHA256(dataPw + sha256Salt).toString();
-    //사용자 인증에서 사용자 비밀번호
-    const password = dataPw;
+const encrypt = function (userPassword) {
+    //사용자 비밀번호
+    const password = userPassword;
+
     //이니셜 벡터 (암호화 알고리즘에서 필요)
     const iv = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
     const salt = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
@@ -29,7 +27,7 @@ const encrypt = function (dataPw) {
             keySize: keySize / 32,
             iterations: iterationCount
         });
-    let encrypted = CryptoJS.AES.encrypt(
+    const encrypted = CryptoJS.AES.encrypt(
         password,
         key256Bits10000Iterations, {
             iv: CryptoJS.enc.Hex.parse(iv)
