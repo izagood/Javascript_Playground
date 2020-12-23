@@ -2,7 +2,6 @@ const CryptoJS = require('crypto-js');
 
 // mainLogin(userId, encrypt($('.inpPw').val(), "adminCertification"))
 
-
 // const passwd = encrypt($("#pw").val(),"userCertification");
 
 /** 테스트 input */
@@ -33,8 +32,9 @@ const encrypt = (dataPw, division) => {
             iterations: iterationCount
         });
     //관리자인증
+    let encrypted;
     if (division == "adminCertification") {
-        var encrypted = CryptoJS.AES.encrypt(
+        encrypted = CryptoJS.AES.encrypt(
             shaPw,
             key256Bits100Iterations, {
                 iv: CryptoJS.enc.Hex.parse(iv)
@@ -42,7 +42,7 @@ const encrypt = (dataPw, division) => {
     }
     //사용자 인증
     else if (division == "userCertification") {
-        var encrypted = CryptoJS.AES.encrypt(
+        encrypted = CryptoJS.AES.encrypt(
             password,
             key256Bits100Iterations, {
                 iv: CryptoJS.enc.Hex.parse(iv)
