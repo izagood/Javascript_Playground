@@ -53,6 +53,6 @@ const encrypt = function(dataPw, division) {
     return passwd;
 }
 
-const returnPassword = encrypt(TEST_PASSWORD, ADMIN_LOGIN);
+const returnPassword = encrypt(TEST_PASSWORD, USER_LOGIN);
 
 console.log(returnPassword);
