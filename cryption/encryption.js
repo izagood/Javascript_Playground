@@ -12,21 +12,21 @@ const USER_LOGIN = 'userCertification';
 /**
  * 관리자 계정 암호화
  */
-const encrypt = (dataPw, division) => {
+const encrypt = function(dataPw, division) {
     //관리자인증에서 salt를 붙여서 사용자 비밀번호 암호화
-    var shaSalt = "mcnc";
-    var shaPw = CryptoJS.SHA256(dataPw + shaSalt).toString();
+    const shaSalt = "mcnc";
+    const shaPw = CryptoJS.SHA256(dataPw + shaSalt).toString();
     //사용자 인증에서 사용자 비밀번호
-    var password = dataPw;
+    const password = dataPw;
     //이니셜 벡터 (암호화 알고리즘에서 필요)
-    var iv = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
-    var salt = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
-    var keySize = 256;
-    var iterationCount = 10000;
-    var securityKey = "A조김예은";
+    const iv = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
+    const salt = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
+    const keySize = 256;
+    const iterationCount = 10000;
+    const securityKey = "A조김예은";
 
     //PBKDF2 키 생성
-    var key256Bits100Iterations =
+    const key256Bits100Iterations =
         CryptoJS.PBKDF2(securityKey, CryptoJS.enc.Hex.parse(salt), {
             keySize: keySize / 32,
             iterations: iterationCount
@@ -48,8 +48,8 @@ const encrypt = (dataPw, division) => {
                 iv: CryptoJS.enc.Hex.parse(iv)
             });
     }
-    var encryptedString = encrypted.toString();
-    var passwd = iv + encryptedString + salt;
+    const encryptedString = encrypted.toString();
+    const passwd = iv + encryptedString + salt;
     return passwd;
 }
 
