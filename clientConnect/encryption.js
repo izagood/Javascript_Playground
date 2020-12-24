@@ -5,7 +5,7 @@ const CryptoJS = require('crypto-js');
 // const passwd = encrypt($("#pw").val(),"userCertification");
 
 /** 테스트 input */
-const TEST_PASSWORD = 'password';
+const TEST_PASSWORD = 'leejaebin';
 const ADMIN_LOGIN = 'adminCertification';
 const USER_LOGIN = 'userCertification';
 

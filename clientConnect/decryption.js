@@ -2,7 +2,7 @@
 //page.mainLogin(userId,util.encrypt($('.inpPw').val(), "adminCertification"))
 // var passwd = util.encrypt($("#pw").val(),"userCertification");
 
-const testPassword = 'd456fe53e807f1ce7c20d2bd772c98e1ldcQDt2xAUGvA7sogy9gaA==034f05fbe46ae450980f303cfdcc7c8c';
+const testPassword = '516ac37d279a0fdbea73b11e0d313c2cHVB1QWx29jBmrEtiAELDsw==525ad0d19cbc1b8f35fc006dcd22b44f';
 
 const CryptoJS = require('crypto-js');
 
